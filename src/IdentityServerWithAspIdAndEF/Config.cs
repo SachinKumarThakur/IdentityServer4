@@ -16,16 +16,6 @@ namespace IdentityServerWithAspNetIdentity
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
-                //new IdentityResource("adminpermission", "admin permission policies", new List<string> { "adminpermission"})
-                //new IdentityResource()  // NEW CHANGE
-                //{
-                //    Name = "AdminPermission",
-                //    DisplayName = "Admin Permission",
-                //    UserClaims =
-                //    {
-                //        "AdminPermission",
-                //    }
-                //}
             };
         }
 
@@ -69,18 +59,16 @@ namespace IdentityServerWithAspNetIdentity
                     RedirectUris = { "http://localhost:5002/signin-oidc" },
                     PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
 
-                    //AllowAccessTokensViaBrowser = true, // NEW CHANGE
-
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "api1",
-                        //"adminpermission", // NEW CHANGE
+                        "api1"
+
                     },
                     AllowOfflineAccess = true,
-                    AlwaysSendClientClaims = true,
-                    AlwaysIncludeUserClaimsInIdToken = true
+                    AlwaysSendClientClaims = true, // New Code
+                    AlwaysIncludeUserClaimsInIdToken = true // New Code
                 },
 
                 new Client

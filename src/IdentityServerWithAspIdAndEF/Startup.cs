@@ -10,7 +10,6 @@ using IdentityServerWithAspNetIdentity.Data;
 using IdentityServerWithAspNetIdentity.Models;
 using IdentityServerWithAspNetIdentity.Services;
 using System.Reflection;
-using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 
 namespace IdentityServerWithAspNetIdentity
@@ -69,27 +68,7 @@ namespace IdentityServerWithAspNetIdentity
                     options.TokenCleanupInterval = 30;
                 });
 
-            //services.AddAuthentication()
-                //.AddGoogle("Google", options =>
-                //{
-                //    options.ClientId = "434483408261-55tc8n0cs4ff1fe21ea8df2o443v2iuc.apps.googleusercontent.com";
-                //    options.ClientSecret = "3gcoTrEDPPJ0ukn_aYYT6PWo";
-                //})
-                //.AddOpenIdConnect("oidc", "OpenID Connect", options =>
-                //{
-                //    options.Authority = "https://demo.identityserver.io/";
-                //    options.ClientId = "implicit";
-                //    options.SaveTokens = true;
-
-                // // options.GetClaimsFromUserInfoEndpoint = true; // NEW CHANGE
-                // // options.ResponseType = "code id_token token";  // NEW CHANGE
-
-                //    options.TokenValidationParameters = new TokenValidationParameters
-                //    {
-                //        NameClaimType = "name",
-                //        RoleClaimType = "role"
-                //    };
-                //});
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

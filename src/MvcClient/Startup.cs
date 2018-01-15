@@ -40,11 +40,10 @@ namespace MvcClient
                     options.RequireHttpsMetadata = false;
                     options.ClientId = "mvc";
                     options.ClientSecret = "secret";
-                    options.ResponseType = "code id_token"; // NEW CHANGE (token)
+                    options.ResponseType = "code id_token"; // Undo (token)
                     options.SaveTokens = true;
                     options.GetClaimsFromUserInfoEndpoint = true;
                     options.Scope.Add("api1");
-                    //options.Scope.Add("adminpermission"); // NEW CHANGE
                     options.Scope.Add("offline_access");
                 });
 
