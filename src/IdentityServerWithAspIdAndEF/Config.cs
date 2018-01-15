@@ -4,7 +4,6 @@
 using IdentityServer4;
 using IdentityServer4.Models;
 using System.Collections.Generic;
-using System.Security.Claims;
 
 namespace IdentityServerWithAspNetIdentity
 {
@@ -17,15 +16,16 @@ namespace IdentityServerWithAspNetIdentity
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
-                new IdentityResource()  // NEW CHANGE
-                {
-                    Name = "AdminPermission",
-                    DisplayName = "Admin Permission",
-                    UserClaims =
-                    {
-                        "AdminPermission",
-                    }
-                }
+                //new IdentityResource("adminpermission", "admin permission policies", new List<string> { "adminpermission"})
+                //new IdentityResource()  // NEW CHANGE
+                //{
+                //    Name = "AdminPermission",
+                //    DisplayName = "Admin Permission",
+                //    UserClaims =
+                //    {
+                //        "AdminPermission",
+                //    }
+                //}
             };
         }
 
@@ -37,9 +37,9 @@ namespace IdentityServerWithAspNetIdentity
                 {
                     Scopes = // NEW CHANGE
                     {
-                        new Scope("AdminPermission", "Admin Permission")
+                        new Scope("adminpermission", "Admin Permission")
                         {
-                            UserClaims = { "AdminPermission" }
+                            UserClaims = { "adminpermission" }
                         }
                     }
                 }
@@ -59,7 +59,7 @@ namespace IdentityServerWithAspNetIdentity
                     ClientName = "MVC Client",
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
 
-                    RequireConsent = false,
+                    RequireConsent = true,
 
                     ClientSecrets =
                     {
@@ -69,16 +69,18 @@ namespace IdentityServerWithAspNetIdentity
                     RedirectUris = { "http://localhost:5002/signin-oidc" },
                     PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
 
-                    AllowAccessTokensViaBrowser = true, // NEW CHANGE
+                    //AllowAccessTokensViaBrowser = true, // NEW CHANGE
 
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         "api1",
-                        "AdminPermission", // NEW CHANGE
+                        //"adminpermission", // NEW CHANGE
                     },
                     AllowOfflineAccess = true,
+                    AlwaysSendClientClaims = true,
+                    AlwaysIncludeUserClaimsInIdToken = true
                 },
 
                 new Client

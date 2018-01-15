@@ -34,9 +34,8 @@ namespace MvcClient.Authorization
 
             Console.WriteLine("\n *** Starting Authroization. ***\n");
 
-            Claim
-                role = context.User.FindFirst("role"),
-                accessLevel = context.User.FindFirst("AdminPermission");
+            Claim role = context.User.FindFirst("role");
+            IEnumerable<Claim> accessLevels = context.User.FindAll("adminpermission");
 
 
             if (role == null)
@@ -44,14 +43,13 @@ namespace MvcClient.Authorization
             else
                 Console.WriteLine("\tUser has 'role' : '{0}'", role.Value);
 
-            if (accessLevel == null)
-                Console.WriteLine("\tUser has no claim 'AdminPermission' : '{0}'", accessLevel == null ? "null" : accessLevel.Value);
-            else
-                Console.WriteLine("\tUser has 'AdminPermission' : '{0}'", accessLevel.Value);
-
-            if (role != null && accessLevel != null)
+            if (role != null && accessLevels != null)
             {
-                if (role.Value == "Administrator" && accessLevel.Value == "Read")
+                var claims = accessLevels.Where(c => c.Type == "adminpermission");
+
+                bool readClaim = claims.Any(c => c.Value.Equals("Read", StringComparison.CurrentCultureIgnoreCase));
+
+                if (role.Value == "Administrator" && readClaim)
                     context.Succeed(requirement);
             }
             else
